@@ -2,7 +2,8 @@ var raw_lines = [];
 var time = [];
 var dialogue = [];
 var currentTime, dial_number, rythmo_position;
-export const loadFile = async (file) => {
+export const loadFile = async (file) => 
+{
   time.length = 0;
   dialogue.length = 0;
   raw_lines.length = 0;
@@ -12,14 +13,24 @@ export const loadFile = async (file) => {
   raw_lines = raw_lines.filter((e) => e != "");
   raw_lines = raw_lines.filter((x) => isNaN(x));
 
-  for (var i = 0; i < raw_lines.length; i++) {
+  for (var i = 0; i < raw_lines.length; i++) 
+  {
     raw_lines[i] = raw_lines[i].trim();
   }
 
-  for (var i = 0; i < raw_lines.length - 1; i++) {
-    if (isNaN(raw_lines[i][0]) && isNaN(raw_lines[i + 1][0])) {
-      raw_lines[i] = raw_lines[i] + " " + raw_lines[i + 1];
-      raw_lines.splice(i + 1, 1);
+  for (var i = 0; i < raw_lines.length - 1; i++) 
+  {
+    let check_d1 = raw_lines[i].search("-->");
+    let check_d2 = raw_lines[i+1].search("-->");
+      // if(isNaN(raw_lines[i][0]) && isNaN(raw_lines[i+1][0]))
+      // {
+      //  raw_lines[i] = raw_lines[i] +" "+ raw_lines[i+1];
+      //  raw_lines.splice(i+1,1);
+      // }
+    if(check_d1 == -1 && check_d2 == -1 )
+    {
+      raw_lines[i] = raw_lines[i] +" "+ raw_lines[i+1];
+      raw_lines.splice(i+1,1);
     }
   }
 
